@@ -1,0 +1,6 @@
+Package: hephabus-tools
+Section: misc
+Priority: optional
+Homepage: https://github.com/hephaisto/hephabus
+Description: Tools for testing libhephabus
+Maintainer: hephaisto <hephaisto@users.noreply.github.com>

@@ -1,0 +1,6 @@
+Package: hephabus
+Section: misc
+Priority: optional
+Homepage: https://github.com/hephaisto/hephabus
+Description: A simple UDP based protocol for IoT nodes
+Maintainer: hephaisto <hephaisto@users.noreply.github.com>

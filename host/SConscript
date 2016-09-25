@@ -1,0 +1,24 @@
+import packaging
+
+env=Environment(tools=["default", "textfile", git_tag_version, get_architecture_from_dpkg])
+env.Append(CCFLAGS="-std=c++11")
+env.Append(CCFLAGS="-DBOOST_ALL_DYN_LINK")
+
+library = env.SharedLibrary("hephabus", ["src/hephabus.cpp"])
+
+install_prefix = "/usr/local/"
+
+package_lib=packaging.make_debian("hephabus",[
+	(library, install_prefix + "lib/libhephabus.so")
+	],env)
+
+package_dev=packaging.make_debian("hephabus-dev",[
+	("include/hephabus.hpp", install_prefix + "include/hephabus.hpp")
+	],env, additional_dependencies="hephabus")
+
+dump = env.Program("hephabus_dump", "tools/dump.cpp", LIBS=["boost_system", "hephabus"])
+send = env.Program("hephabus_send", "tools/send.cpp", LIBS=["boost_system", "hephabus"])
+
+package = env.Alias("package",[package_lib, package_dev])
+tools = env.Alias("tools", [dump, send])
+Default(package)
